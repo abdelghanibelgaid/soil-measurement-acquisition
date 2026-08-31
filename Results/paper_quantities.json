@@ -1,0 +1,34 @@
+{
+  "n_environments": 18,
+  "baseline_context": [
+    "Irr",
+    "Trim",
+    "Driv"
+  ],
+  "ridge_alpha": 10.0,
+  "baseline_loss": 1.442895927136219,
+  "best_singleton": "OM",
+  "best_singleton_loss": 1.392692878617964,
+  "best_singleton_improvement_pct": 3.4793256792882654,
+  "best_singleton_voi": 0.050203048518254904,
+  "best_singleton_ci95": [
+    -0.12349224230423884,
+    0.20793034383501116
+  ],
+  "best_singleton_positive_env_fraction": 0.5,
+  "best_two_subset": "OM+K",
+  "best_two_loss": 1.4168407144005188,
+  "full_loss": 1.4943754130370157,
+  "full_vs_best_singleton_degradation_pct": 7.301145570583816,
+  "full_vs_baseline_change_pct": -3.5677892585760107,
+  "cost_budget_cases": 2612,
+  "greedy_exact_oracle_fraction": 0.97052067381317,
+  "greedy_mean_regret": 1.7594410429806154e-05,
+  "greedy_max_regret": 0.0005968389615929048,
+  "oracle_unspent_budget_fraction": 0.7871362940275651,
+  "oracle_subset_distribution": {
+    "OM": 0.7745022970903522,
+    "none": 0.19601837672281777,
+    "P+K": 0.029479326186830017
+  }
+}
