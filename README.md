@@ -23,7 +23,7 @@ The framework combines machine learning with empirical value of information and 
 
 ## Abstract
 
-Soil testing creates a sequential decision problem: a recommendation system may receive management context before laboratory measurements, while each additional soil test has a monetary cost and uncertain decision value. A value-of-information formulation is developed for fertilizer decision support. For a measurement subset, cross-validated downstream action loss defines empirical risk; marginal value of information is the reduction in that loss, and a budgeted subset problem selects measurements with minimum risk subject to laboratory cost. A multi-environment benchmark uses 18 tomato environments from Latin America with soil pH, organic matter, phosphorus, potassium, and recorded extra N-P-K fertilizer amounts. The recorded fertilizer vector is treated strictly as a historical reference action, not as a causal agronomic optimum. Under leave-one-environment-out validation with a standardized multi-output ridge model, organic matter is the best singleton and reduces normalized action loss by 3.48\% relative to a no-soil baseline. Its paired 95\% bootstrap interval spans zero ($-0.1235$ to $0.2079$), indicating substantial sampling uncertainty. The complete four-measurement panel is 7.30\% worse than organic matter alone and 3.57\% worse than the no-soil baseline. Across 2,612 cost--budget cases generated from 256 relative-cost vectors, positive-value-of-information-per-cost acquisition matches the exact budget oracle in 97.05\% of cases; the remaining cases arise from joint P+K value not detectable from singleton marginal gains. The exact oracle leaves available budget unspent in 78.71\% of cases. The results show that measurement acquisition should depend on downstream value rather than affordability alone and that exact subset optimization can expose complementarities missed by myopic acquisition.
+Soil testing creates a sequential decision problem: a recommendation system may receive management context before laboratory measurements, while each additional soil test has a monetary cost and uncertain decision value. A value-of-information formulation is developed for fertilizer decision support. For a measurement subset, cross-validated downstream action loss defines empirical risk; marginal value of information is the reduction in that loss, and a budgeted subset problem selects measurements with minimum risk subject to laboratory cost. A multi-environment benchmark uses 18 tomato environments from Latin America with soil pH, organic matter, phosphorus, potassium, and recorded extra amounts of N-P-K fertilizer. The recorded fertilizer vector is treated strictly as a historical reference action, not as a causal agronomic optimum. Under leave-one-environment-out validation with a standardized multi-output ridge model, organic matter is the best singleton and reduces normalized action loss by 3.48\% relative to a no-soil baseline. Its paired 95\% bootstrap interval spans zero ($-0.1235$ to $0.2079$), indicating substantial sampling uncertainty. The complete four-measurement panel is 7.30\% worse than organic matter alone and 3.57\% worse than the no-soil baseline. Across 2,612 cost-budget cases generated from 256 relative-cost vectors, positive-value-of-information-per-cost acquisition matches the exact budget oracle in 97.05\% of cases; the remaining cases arise from a joint P+K value not detectable from singleton marginal gains. The exact oracle leaves available budget unspent in 78.71\% of cases. The results show that measurement acquisition should depend on downstream value rather than affordability alone and that exact subset optimization can expose complementarities missed by myopic acquisition.
 
 ## Research question
 
@@ -80,7 +80,7 @@ Latitude and longitude are preserved in the bundled public file but excluded fro
 - extra phosphorus, `ExP`
 - extra potassium, `ExK`
 
-The recorded extra N--P--K amounts are treated strictly as **historical reference actions**. They are not interpreted as experimentally verified fertilizer optima.
+The recorded extra N-P-K amounts are treated strictly as **historical reference actions**. They are not interpreted as experimentally verified fertilizer optima.
 
 ## Experimental design
 
@@ -93,7 +93,8 @@ $$
 Each of the 18 environments is held out once using leave-one-environment-out validation. Prediction error is evaluated with normalized NPK action loss:
 
 $$
-\ell_i(S)=\frac{1}{3}\sum_{t\in\{N,P,K\}}\frac{|a_{it}-\hat a_{it}(S)|}{\operatorname{IQR}(a_t)}.
+\ell_i(S)=\frac{1}{3}\sum_{t\in{N,P,K}}
+\frac{|a_{it}-\hat a_{it}(S)|}{\mathrm{IQR}(a_t)}.
 $$
 
 The notebook evaluates all
@@ -102,7 +103,7 @@ $$
 2^4=16
 $$
 
-possible soil-measurement subsets on identical held-out environments. Uncertainty in singleton value of information is estimated using **10,000 paired bootstrap resamples**.
+possible soil-measurement subsets on identical held-out environments. Uncertainty in the singleton value of information is estimated using **10,000 paired bootstrap resamples**.
 
 ## What the notebook reproduces
 
@@ -116,7 +117,7 @@ The single notebook implements the full computational workflow:
 6. Computes singleton empirical value of information.
 7. Performs 10,000 paired bootstrap resamples over held-out environments.
 8. Identifies the exact best subset at each measurement count.
-9. Enumerates all 256 heterogeneous relative-cost vectors and 2,612 attainable cost--budget cases.
+9. Enumerates all 256 heterogeneous relative-cost vectors and 2,612 attainable cost-budget cases.
 10. Compares the exact budget oracle with a positive-VOI-per-cost sequential policy.
 11. Evaluates a public laboratory-menu cost illustration.
 12. Runs ridge-penalty sensitivity analysis.
@@ -161,7 +162,7 @@ $$
 \{0.5,1,2,4\},
 $$
 
-producing **256 cost vectors** and **2,612 attainable cost--budget cases**.
+producing **256 cost vectors** and **2,612 attainable cost-budget cases**.
 
 The sequential policy maximizes positive marginal VOI per unit cost and stops when no feasible measurement has positive marginal VOI.
 
@@ -270,7 +271,7 @@ soil-measurement-acquisition/
 └── figures/
     ├── figure1_frontier.png
     ├── figure2_singleton_voi.png
-    ├── figureS1_lab_cost_menu.png
+    └── figureS1_lab_cost_menu.png
 ```
 
 The notebook is the computational source of truth. The committed `results/` and `figures/` directories provide immediately inspectable outputs and are overwritten when the notebook is rerun.
@@ -305,7 +306,6 @@ For now, please cite the repository title:
 **Workshop:** Second Workshop on ML×OR: Mathematical Foundations and Operational Integration of Machine Learning for Uncertainty-Aware Decision-Making  
 **Conference:** 40th Conference on Neural Information Processing Systems, NeurIPS 2026  
 **Location:** Atlanta, Georgia, USA  
-**Status:** Submission ready
 
 Submission page: https://openreview.net/group?id=NeurIPS.cc/2026/Workshop/MLxOR
 
